@@ -1,0 +1,13 @@
+NameProvider: "uuid"
+API:
+  Port: 1234
+Compute:
+  Enabled: true
+  Orchestrators:
+    - nats://<YOUR_NETWORK_ID>.us1.cloud.expanso.io:4222
+  Auth:
+    Token: "<YOUR_AUTH_TOKEN>"
+  TLS:
+    RequireTLS: true
+JobAdmissionControl:
+  AcceptNetworkedJobs: true

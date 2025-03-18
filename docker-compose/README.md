@@ -1,6 +1,6 @@
 # Bacalhau Docker Compose Configurations
 
-This directory contains Docker Compose configurations for setting up Bacalhau clusters in both single-region and multi-region deployments.
+This directory contains Docker Compose configurations for setting up Bacalhau clusters in single-region, multi-region and Expanso Cloud deployments.
 
 ## Directory Structure
 
@@ -12,11 +12,15 @@ docker-compose/
 │ │ ├── compute-us.yaml
 │ │ └── orchestrator.yaml
 │ └── docker-compose.yml
-└── single-region/
-├── config/
-│ ├── compute.yaml
-│ └── orchestrator.yaml
-└── docker-compose.yml
+├── single-region/
+│ ├── config/
+│ │ ├── compute.yaml
+│ │ └── orchestrator.yaml
+│ └── docker-compose.yml
+└── expanso-cloud/
+  ├── config/
+  │ └── compute.yaml
+  └── docker-compose.yml
 ```
 
 ## Single Region Setup
@@ -89,6 +93,42 @@ docker compose up -d
 - Storage US: 9002 (API), 9003 (Console)
 - Storage EU: 9004 (API), 9005 (Console)
 
+## Single Region Expanso Cloud Setup
+
+The single-region Expanso Cloud configuration provides a simple Bacalhau cluster with:
+
+- 10 compute nodes
+- Storage object storage
+- A client container for interacting with the cluster
+
+_The orchestrator node is managed by Expanso Cloud._
+
+### Usage
+
+#### Prerequisites
+
+Before you start, make sure you have an [Expanso Cloud](https://cloud.expanso.io) account and have created a [new network](https://cloud.expanso.io/networks/new).
+
+In `compute.yaml` and `docker-compose.yml` replace all `<YOUR_NETWORK_ID>` and `<YOUR_AUTH_TOKEN>` values with the ones you got from Expanso Cloud.
+
+```bash
+cd expanso-cloud
+docker compose up -d
+```
+
+### Components
+
+- **Orchestrator**: Manages job scheduling and cluster coordination
+- **Compute Nodes**: Execute jobs (10 replicas)
+- **Storage**: S3-compatible object storage for job results (MinIO)
+- **Client**: Container for interacting with the Bacalhau CLI
+- **Expanso Cloud**: All in one platform for managing your orchestrator, compute nodes and jobs.
+
+### Ports
+
+- Orchestrator: 8438 (API), 1234 (API), 4222 (NATS)
+- Storage: 9000 (API), 9001 (Console)
+
 ## Common Configuration
 
 Both setups share these environment variables:
@@ -100,7 +140,9 @@ Both setups share these environment variables:
 
 ## Interacting with the Cluster
 
-To interact with either cluster:
+_Note: If you are using the `expanso-cloud` setup, you can interact with the cluster using an [Expanso Cloud](https://cloud.expanso.io) account._
+
+To interact with a cluster:
 
 1. Connect to the client container:
 
