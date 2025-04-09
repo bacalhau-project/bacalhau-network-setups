@@ -15,7 +15,7 @@ services:
     <<: *compute-image
     command: serve -c /etc/bacalhau/config.yaml
     volumes:
-      - ./config/compute.yaml:/etc/bacalhau/config.yaml
+      - ./config.yaml:/etc/bacalhau/config.yaml
     environment:
       <<: *common-env-variables
     depends_on:

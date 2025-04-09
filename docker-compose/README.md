@@ -109,8 +109,9 @@ _The orchestrator node is managed by Expanso Cloud._
 
 Before you start, make sure you have an [Expanso Cloud](https://cloud.expanso.io) account and have created a [new network](https://cloud.expanso.io/networks/new).
 
-In `compute.yaml` and `docker-compose.yml` replace all `<YOUR_NETWORK_ID>` and `<YOUR_AUTH_TOKEN>` values with the ones you got from Expanso Cloud.
+Once the new network created, click on "_+ Node_" and copy the configuration into a file called `config.yaml` in the `expanso-cloud` directory.
 
+Then, start the cluster:
 ```bash
 cd expanso-cloud
 docker compose up -d
