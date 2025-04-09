@@ -1,0 +1,2 @@
+# Ignore the config.yaml file inside the expanso-cloud folder
+docker-compose/expanso-cloud/config.yaml
